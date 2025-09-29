@@ -65,7 +65,6 @@
   font-size: 1rem;
 }
 
-/* Анімації */
 @keyframes fadeIn {
   from {
     opacity: 0;
