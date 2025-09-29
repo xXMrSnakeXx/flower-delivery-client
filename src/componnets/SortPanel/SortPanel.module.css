@@ -1,0 +1,102 @@
+.sortPanel {
+  display: flex;
+  align-items: center;
+  gap: var(--gap);
+  flex-shrink: 0;
+}
+
+.sortButtons {
+  display: flex;
+  gap: calc(var(--gap) / 2);
+}
+
+.sortBtn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: var(--surface);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 13px;
+  white-space: nowrap;
+  min-width: 80px;
+  text-align: center;
+  color: var(--text);
+}
+
+.sortBtn:hover {
+  border-color: var(--primary);
+  background: var(--surface);
+}
+
+.sortBtn.active {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}
+
+.orderBtn {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  background: var(--surface);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: all 0.2s;
+  flex-shrink: 0;
+  min-width: 38px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+
+.orderBtn:hover {
+  border-color: var(--primary);
+  background: var(--primary);
+  color: white;
+}
+
+@media (max-width: 968px) {
+  .sortPanel {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 768px) {
+  .sortPanel {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: calc(var(--gap) / 2);
+  }
+
+  .sortButtons {
+    width: 100%;
+    justify-content: flex-end;
+    gap: calc(var(--gap) / 4);
+  }
+}
+
+@media (max-width: 480px) {
+  .sortButtons {
+    flex-direction: column;
+    width: 100%;
+    gap: calc(var(--gap) / 2);
+  }
+
+  .sortBtn {
+    width: 100%;
+    text-align: center;
+    min-width: unset;
+    padding: 10px 12px;
+  }
+
+  .orderBtn {
+    width: 100%;
+    min-width: unset;
+    height: 36px;
+  }
+}

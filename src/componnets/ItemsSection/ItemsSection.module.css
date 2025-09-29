@@ -1,0 +1,26 @@
+.itemsSection h2 {
+  margin-bottom: 1.5rem;
+  color: #1e293b;
+}
+
+.shopGroups {
+  margin-bottom: 2rem;
+}
+
+.cartSummary {
+  border-top: 2px solid #f1f5f9;
+  padding-top: 1rem;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.totalPrice {
+  color: #0ea5e9;
+  font-size: 1.5rem;
+}

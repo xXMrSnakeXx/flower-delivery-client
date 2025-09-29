@@ -1,0 +1,233 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: calc(var(--gap) * 1.25);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: calc(var(--radius) * 1.2);
+  padding: 0;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.2s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: calc(var(--gap) * 1.5) calc(var(--gap) * 1.5) 0
+    calc(var(--gap) * 1.5);
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: calc(var(--radius) * 0.4);
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.description {
+  margin: calc(var(--gap) * 0.5) 0 0 0;
+  padding: 0 calc(var(--gap) * 1.5);
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.form {
+  padding: calc(var(--gap) * 1.5);
+}
+
+.field {
+  margin-bottom: calc(var(--gap) * 1.25);
+}
+
+.label {
+  display: block;
+  margin-bottom: calc(var(--gap) * 0.375);
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.input {
+  width: 100%;
+  padding: calc(var(--gap) * 0.75);
+  border: 1px solid #d1d5db;
+  border-radius: calc(var(--radius) * 0.8);
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+}
+
+.input:disabled {
+  background-color: #f9fafb;
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.errorInput {
+  border-color: #dc2626;
+}
+
+.errorInput:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+.fieldError {
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin-top: calc(var(--gap) * 0.25);
+}
+
+.error {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: calc(var(--gap) * 0.75);
+  border-radius: calc(var(--radius) * 0.8);
+  margin-bottom: calc(var(--gap) * 1.25);
+  font-size: 0.9rem;
+}
+
+.actions {
+  display: flex;
+  gap: calc(var(--gap) * 0.75);
+  margin-top: calc(var(--gap) * 0.5);
+}
+
+.primaryButton {
+  flex: 1;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: calc(var(--gap) * 0.75) calc(var(--gap) * 1.25);
+  border-radius: calc(var(--radius) * 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.primaryButton:hover:not(:disabled) {
+  background-color: #0284c7;
+}
+
+.primaryButton:disabled {
+  background-color: var(--muted);
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  flex: 0 0 auto;
+  background-color: var(--surface);
+  color: #374151;
+  border: 1px solid #d1d5db;
+  padding: calc(var(--gap) * 0.75) calc(var(--gap) * 1.25);
+  border-radius: calc(var(--radius) * 0.8);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.secondaryButton:hover:not(:disabled) {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+.secondaryButton:disabled {
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: var(--gap);
+  }
+
+  .modal {
+    max-width: 100%;
+  }
+
+  .header {
+    padding: calc(var(--gap) * 1.25) calc(var(--gap) * 1.25) 0
+      calc(var(--gap) * 1.25);
+  }
+
+  .form {
+    padding: calc(var(--gap) * 1.25);
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+
+  .secondaryButton {
+    order: -1;
+  }
+}

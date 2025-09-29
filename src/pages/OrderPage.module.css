@@ -1,0 +1,120 @@
+.orderPage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: var(--gap);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  transition: all 0.2s ease;
+}
+
+.backBtn:hover {
+  color: #0284c7;
+  transform: translateX(-3px);
+}
+
+.orderContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--surface);
+  border-radius: calc(var(--radius) * 2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.pageTitle {
+  text-align: center;
+  color: var(--text);
+  font-size: 2.5rem;
+  margin: 0;
+  padding: 30px 20px 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.thankYou {
+  text-align: center;
+  color: var(--muted);
+  font-size: 1.1rem;
+  margin: 0 0 30px;
+  padding: 0 20px;
+  line-height: 1.5;
+}
+
+.orderDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+@media (max-width: 768px) {
+  .orderPage {
+    padding: calc(var(--gap) / 2);
+    background: var(--bg);
+  }
+
+  .orderContainer {
+    border-radius: calc(var(--radius) * 1.5);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .pageTitle {
+    font-size: 2rem;
+    padding: 25px 15px 8px;
+  }
+
+  .thankYou {
+    font-size: 1rem;
+    margin: 0 0 25px;
+    padding: 0 15px;
+  }
+
+  .backBtn {
+    padding: 10px 0;
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  .orderDetails {
+    gap: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .orderPage {
+    padding: calc(var(--gap) / 3);
+  }
+
+  .orderContainer {
+    border-radius: calc(var(--radius) * 1.2);
+  }
+
+  .pageTitle {
+    font-size: 1.8rem;
+    padding: 20px 12px 5px;
+  }
+
+  .thankYou {
+    font-size: 0.95rem;
+    margin: 0 0 20px;
+    padding: 0 12px;
+  }
+
+  .backBtn {
+    font-size: 0.9rem;
+    padding: 8px 0;
+  }
+}
