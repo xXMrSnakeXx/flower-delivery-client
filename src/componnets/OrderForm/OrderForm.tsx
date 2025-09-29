@@ -64,7 +64,7 @@ const validationSchema = Yup.object().shape({
       .trim()
       .matches(
         PHONE_REGEX,
-        'Phone must be 7–20 digits, may contain +, (), spaces, -'
+        'Enter a valid phone number (e.g., 063 123 45 67)'
       )
       .required('Phone is required'),
   }),
@@ -233,7 +233,7 @@ export default function OrderForm({
             const norm = normalizePhone((e.target as HTMLInputElement).value);
             formik.setFieldValue('customer.phone', norm, false);
           }}
-          placeholder="+380 63 123 45 67"
+          placeholder="063 123 45 67"
           className={
             formik.touched.customer?.phone && formik.errors.customer?.phone
               ? styles.errorInput
