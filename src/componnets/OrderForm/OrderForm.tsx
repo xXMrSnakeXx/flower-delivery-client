@@ -5,6 +5,7 @@ import styles from './OrderForm.module.css';
 import type { CartItem } from '../../store/cartStore';
 import { useCustomerStore } from '../../store/customerStore';
 import { formatPrice } from '../../utils/priceHelpers';
+import { formatPhoneNumber } from '../../utils/formatCustomerNumber';
 
 type OrderFormValues = {
   customer: {
@@ -34,11 +35,19 @@ type OrderFormProps = {
 
 const normalizeEmail = (v: string) => v.trim().toLowerCase();
 const normalizePhone = (v: string) =>
-  v.replace(/\s+/g, '').replace(/-/g, '').trim();
+  v
+    .replace(/\s+/g, '')
+    .replace(/-/g, '')
+    .replace(/\(/g, '')
+    .replace(/\)/g, '')
+    .trim();
 const normalizeName = (v: string) => v.trim();
 const normalizeAddress = (v: string) => v.trim();
 
-const PHONE_REGEX = /^\+?[0-9()\s-]{7,20}$/;
+
+
+const PHONE_REGEX =
+  /^(\+?\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/;
 const ADDRESS_REGEX = new RegExp("^[\\p{L}0-9\\s.,'’\\-()]{5,200}$", 'u');
 const NAME_REGEX = new RegExp("^[\\p{L}\\s'’\\-]{2,100}$", 'u');
 
@@ -113,7 +122,7 @@ export default function OrderForm({
       customer: {
         name: customer.name?.trim() ?? '',
         email: customer.email?.trim().toLowerCase() ?? '',
-        phone: customer.phone ? normalizePhone(customer.phone) : '',
+        phone: customer.phone ? formatPhoneNumber(customer.phone) : '',
       },
       delivery: {
         address: customer.defaultAddress?.trim() ?? '',
@@ -139,7 +148,6 @@ export default function OrderForm({
 
   const nameProps = formik.getFieldProps('customer.name');
   const emailProps = formik.getFieldProps('customer.email');
-  const phoneProps = formik.getFieldProps('customer.phone');
   const addressProps = formik.getFieldProps('delivery.address');
 
   const isSubmitDisabled =
@@ -215,13 +223,10 @@ export default function OrderForm({
         <input
           id="customer.phone"
           type="tel"
-          {...phoneProps}
+          value={formik.values.customer.phone}
           onChange={(e) => {
-            const filtered = (e.target as HTMLInputElement).value.replace(
-              /[^0-9+\s\-()]/g,
-              ''
-            );
-            formik.setFieldValue('customer.phone', filtered, false);
+            const formatted = formatPhoneNumber(e.target.value);
+            formik.setFieldValue('customer.phone', formatted, false);
           }}
           onBlur={(e) => {
             formik.handleBlur(e);

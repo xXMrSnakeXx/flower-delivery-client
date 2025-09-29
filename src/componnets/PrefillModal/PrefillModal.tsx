@@ -5,12 +5,14 @@ import { useCustomerStore } from '../../store/customerStore';
 import styles from './PrefillModal.module.css';
 import { prefillCustomer } from '../../api/customers';
 import { IoIosClose } from 'react-icons/io';
+import { formatPhoneNumber } from '../../utils/formatCustomerNumber';
 
 type Props = {
   onClose: () => void;
 };
 
-const PHONE_REGEX = /^\+?[0-9()\s-]{7,20}$/;
+const PHONE_REGEX =
+  /^(\+?\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$/;
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 const validationSchema = Yup.object({
@@ -48,6 +50,8 @@ export default function PrefillModal({ onClose }: Props) {
         const normPhone = values.phone
           .replace(/\s+/g, '')
           .replace(/-/g, '')
+          .replace(/\(/g, '')
+          .replace(/\)/g, '')
           .trim();
 
         const data = await prefillCustomer(normEmail, normPhone);
@@ -85,7 +89,12 @@ export default function PrefillModal({ onClose }: Props) {
 
   const normalizeEmail = (v: string) => v.trim().toLowerCase();
   const normalizePhone = (v: string) =>
-    v.replace(/\s+/g, '').replace(/-/g, '').trim();
+    v
+      .replace(/\s+/g, '')
+      .replace(/-/g, '')
+      .replace(/\(/g, '')
+      .replace(/\)/g, '')
+      .trim();
 
   return (
     <div className={styles.backdrop} onClick={handleBackdropClick}>
@@ -153,8 +162,8 @@ export default function PrefillModal({ onClose }: Props) {
               name="phone"
               value={formik.values.phone}
               onChange={(e) => {
-                const filtered = e.target.value.replace(/[^0-9+\s\-()]/g, '');
-                formik.setFieldValue('phone', filtered);
+                const formatted = formatPhoneNumber(e.target.value);
+                formik.setFieldValue('phone', formatted);
               }}
               onBlur={(e) => {
                 formik.handleBlur(e);
@@ -162,7 +171,7 @@ export default function PrefillModal({ onClose }: Props) {
                 formik.setFieldValue('phone', normalized);
               }}
               disabled={formik.isSubmitting}
-              placeholder="+1 234 567 8900"
+              placeholder="+380 63 123 45 67"
               className={
                 formik.touched.phone && formik.errors.phone
                   ? `${styles.input} ${styles.errorInput}`
